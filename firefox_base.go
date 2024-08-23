@@ -92,7 +92,7 @@ func firefoxGetCookies(cookiePath string) ([]Cookie, error) {
 			&creationDate,
 			&expirationDate,
 			&lastAccessDate,
-			&cookie.Domain,
+			&cookie.Host,
 			&cookie.HttpOnly,
 			&cookie.Name,
 			&cookie.Value,

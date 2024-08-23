@@ -26,11 +26,9 @@ func firefoxProfilesPath() string {
 	case windows:
 		return filepath.Join(os.Getenv("APPDATA"), "Mozilla", "Firefox", "Profiles")
 	case mac:
-		// TODO: Replace windows placeholder
-		return filepath.Join(os.Getenv("APPDATA"), "Mozilla", "Firefox", "Profiles")
+		return filepath.Join(os.Getenv("HOME"), "Library", "Application Support", "Firefox", "Profiles")
 	case linux:
-		// TODO: Replace windows placeholder
-		return filepath.Join(os.Getenv("APPDATA"), "Mozilla", "Firefox", "Profiles")
+		return filepath.Join(os.Getenv("HOME"), ".mozilla", "firefox")
 	default:
 		return "unknown profiles path"
 	}

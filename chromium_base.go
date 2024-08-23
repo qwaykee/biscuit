@@ -130,7 +130,7 @@ func (cb *ChromiumBase) getCookiesFrom(cookiePath string) ([]Cookie, error) {
 			&expirationDate,
 			&lastAccessDate,
 			&lastUpdateDate,
-			&cookie.Domain,
+			&cookie.Host,
 			&cookie.HttpOnly,
 			&cookie.Name,
 			&cookie.Value,

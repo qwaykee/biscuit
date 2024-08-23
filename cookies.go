@@ -11,7 +11,7 @@ type (
 		ExpirationDate time.Time
 		LastAccessDate time.Time
 		LastUpdateDate time.Time
-		Domain         string
+		Host           string
 		HttpOnly       bool
 		Name           string
 		Value          string
@@ -57,7 +57,31 @@ func GetCookies(browserName BrowserName, filters ...Filter) ([]Cookie, error) {
 	return cookies, nil
 }
 
-func (c Cookie) ToHTTPCookie() http.Cookie {
-	// TODO: Finish
-	return http.Cookie{}
+func (c Cookie) ToHTTPCookie() *http.Cookie {
+	var sameSite http.SameSite
+	switch c.SameSite {
+	case "Strict":
+		sameSite = http.SameSiteStrictMode
+	case "Lax":
+		sameSite = http.SameSiteLaxMode
+	case "None":
+		sameSite = http.SameSiteNoneMode
+	default:
+		sameSite = http.SameSiteDefaultMode
+	}
+
+	return &http.Cookie{
+		Name: c.Name,
+		Value: c.Value,
+		Path: c.Path,
+		Expires: c.ExpirationDate,
+		// RawExpires string    // for reading cookies only
+		// MaxAge      int
+		Secure: c.Secure,
+		HttpOnly: c.HttpOnly,
+		SameSite: sameSite,
+		// Partitioned bool
+		// Raw         string
+		// Unparsed:    []string // Raw text of unparsed attribute-value pairs
+	}
 }

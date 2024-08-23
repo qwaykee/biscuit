@@ -2,14 +2,19 @@
 
 NOTE: This library isn't stable yet, expect many changes in the future
 
-A simple library to read cookies from multiple browsers accross all operating systems
+A simple library to read cookies from multiple browsers accross all operating systems with a Kooky-like syntax
 
 Currently supports:
 - Chrome on Windows only
-- Firefox, librewolf, waterfox on Windows only
+- Firefox, librewolf, waterfox, zen on Windows only
 - Electron apps
 
-Although the list is small now, the code is made to easily add new chromium and firefox based browsers which covers most browsers
+Although the list is small now, the code is made to easily add new chromium and firefox based browsers which covers most browsers as well as others browser
+
+### Why this project in the first place?
+
+Trying to retrieve cookies for a personal project, I found that most libraries didn't work for me or didn't meet my requirements.
+This library aims to be internally as simple as possible and to have a great developer experience.
 
 ## Example usage
 
@@ -27,10 +32,10 @@ func main() {
 		panic(err)
 	}
 
-	tbl := table.New("Domain", "Name", "Value")
+	tbl := table.New("Host", "Name", "Value")
 
 	for _, cookie := range cookies {
-		tbl.AddRow(cookie.Domain, cookie.Name, maxSize(cookie.Value, 80))
+		tbl.AddRow(cookie.Host, cookie.Name, maxSize(cookie.Value, 80))
 	}
 
 	tbl.Print()

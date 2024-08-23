@@ -1,9 +1,6 @@
 package biscuit
 
-import (
-	"strings"
-	"errors"
-)
+import "errors"
 
 type Browser interface {
 	Name() string
@@ -19,6 +16,7 @@ var (
 	Firefox BrowserName = "firefox"
 	Librewolf BrowserName = "librewolf"
 	Waterfox BrowserName = "waterfox"
+	Zen BrowserName = "zen"
 	Electron BrowserName = "electron"
 )
 
@@ -29,21 +27,15 @@ func NewBrowser(browserName BrowserName) (Browser, error) {
 	case Firefox:
 		return NewFirefox(), nil
 	case Librewolf:
-		return NewLibrewolf(), nil
+		return NewFirefoxGeneric("librewolf"), nil
 	case Waterfox:
-		return NewWaterfox(), nil
+		return NewFirefoxGeneric("Waterfox"), nil
+	case Zen:
+		return NewFirefoxGeneric("Zen"), nil
 	case Electron:
 		// TODO: Fix placeholder discord to allow any electron apps
 		return NewElectron("discord")
 	default:
 		return nil, errors.New("selected browser isn't implemented yet")
 	}
-}
-
-func cutAnyPrefix(s string, prefixes ...string) string {
-	for _, p := range prefixes {
-		s, _ = strings.CutPrefix(s, p)
-	}
-
-	return s
 }

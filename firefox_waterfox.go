@@ -9,7 +9,7 @@ type WaterfoxBrowser struct {
 	FirefoxBase
 }
 
-func NewLibrewolf() *WaterfoxBrowser {
+func NewWaterfox() *WaterfoxBrowser {
 	return &WaterfoxBrowser{
 		FirefoxBase: FirefoxBase{
 			ProfilesPathFn: waterfoxProfilesPath,

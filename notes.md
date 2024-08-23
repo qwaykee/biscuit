@@ -17,9 +17,8 @@ https://www.cyberark.com/resources/threat-research-blog/the-current-state-of-bro
 - filters.go: Implements all the default filters
 - platform_detection.go: Simple function to detect the current running OS and normalize it to constants
 
-- chromium_base.go: Base for all chromium-based browsers
-- chromium_browsername: Completion of needed information (cookiePath etc.) for chromium-based browsers
-- firefox.go: Firefox browser, TODO: add base for firefox based browsers (librewolf, waterfox, ice cat)
+- browser_base.go: Base for all "browser"-based browsers (examples: chromium_base.go, firefox_base.go)
+- browser_browsername: Completion of needed information for "browser"-based browsers  (examples: chromium_chrome.go, firefox_firefox.go)
 - electron_appname.go: Wrapper around chromium_electron.go or custom GetCookies implementation if needed
 
 # Path handling

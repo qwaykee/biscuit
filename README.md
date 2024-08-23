@@ -17,7 +17,7 @@ Although the list is small now, the code is made to easily add new chromium and 
 package main
 
 import (
-	"biscuit"
+	"github.com/qwaykee/biscuit"
 	"github.com/rodaine/table"
 )
 

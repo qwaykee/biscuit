@@ -30,7 +30,7 @@ func NewBrowser(browserName BrowserName) (Browser, error) {
 		return NewFirefox(), nil
 	case Librewolf:
 		return NewLibrewolf(), nil
-	case Librewolf:
+	case Waterfox:
 		return NewWaterfox(), nil
 	case Electron:
 		// TODO: Fix placeholder discord to allow any electron apps

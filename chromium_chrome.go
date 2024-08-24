@@ -9,7 +9,7 @@ type ChromeBrowser struct {
 	ChromiumBase
 }
 
-func NewChrome() (*ChromeBrowser, error) {
+func NewChrome() (Browser, error) {
 	chrome := &ChromeBrowser{
 		ChromiumBase: ChromiumBase{
 			LocalStatePathFn: chromeLocalStatePath,

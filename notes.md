@@ -1,12 +1,27 @@
 # TODO
 
-[ ] Chrome (chromium), firefox, safari support
-[ ] Edge, opera, epiphany, arc (chromium), firefox and derivates, internet explorer support
-[ ] !!Edge support!! (can't find the cookie location)
-[ ] Windows, mac os, linux support
-[x] Cookie filters when reading
-[ ] Test for linux and mac os
-[ ] Generic chromium and firefox based browsers support
+- [ ] Chrome (chromium), firefox, safari support
+- [ ] Edge, opera, epiphany, arc (chromium), firefox and derivates, internet explorer support
+- [ ] !!Edge support!! (can't find the cookie location)
+- [ ] Windows, mac os, linux support
+- [x] Cookie filters when reading
+- [ ] Test for linux and mac os
+- [ ] Generic chromium and firefox based browsers support
+- [x] Switch to BrowsersFactory
+- [ ] Add behavior settings: 
+
+```golang
+type Behavior struct {
+	// if the database can't be opened because
+	// it's already used by another process, try killing it
+	TryKillingProcess bool
+
+
+	// if the database can't be opened, retry after x seconds
+	// let nil if you don't want to retry
+	AutoReconnect time.Duration
+}
+```
 
 https://www.cyberark.com/resources/threat-research-blog/the-current-state-of-browser-cookies
 

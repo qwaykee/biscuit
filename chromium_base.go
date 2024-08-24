@@ -157,20 +157,14 @@ func (cb *ChromiumBase) getCookiesFrom(cookiePath string) ([]Cookie, error) {
 		// TODO: Decrypt for every OS
 		switch detectOS() {
 		case windows:
-			if cb.Version != 0 && cb.Version >= 80 {
-				if decryptedValue, err := decryptWithAES(cb.DecryptedAESKey, cookie.EncryptedValue); err != nil {
-					log.Println(err)
-					// return []Cookie{}, err
-				} else {
-					cookie.Value = decryptedValue
-				}
-			} else {
-				if decryptedValue, err := decryptWithDPAPI(cookie.EncryptedValue); err != nil {
-					log.Println(err)
-					// return []Cookie{}, err
+			if decryptedValue, err := decryptWithAES(cb.DecryptedAESKey, cookie.EncryptedValue); err != nil {
+				if decryptedValue, err := decryptWithDPAPI(cookie.EncryptedValue); err != nil { // (Chromium version =< 80)
+					return cookies, err
 				} else {
 					cookie.Value = string(decryptedValue)
 				}
+			} else {
+				cookie.Value = decryptedValue
 			}
 		}
 

@@ -11,13 +11,15 @@ type FirefoxGenericBrowser struct {
 	FirefoxBase
 }
 
-func NewFirefoxGeneric(name string) *FirefoxGenericBrowser {
-	// name is case sensitive for the path to work
-	return &FirefoxGenericBrowser{
-		name: name,
-		FirefoxBase: FirefoxBase{
-			ProfilesPathFn: firefoxGenericProfilePath(name),
-		},
+func NewFirefoxGeneric(name string) func() (Browser, error) {
+	return func() (Browser, error) {
+		// name is case sensitive for the path to work
+		return &FirefoxGenericBrowser{
+			name: name,
+			FirefoxBase: FirefoxBase{
+				ProfilesPathFn: firefoxGenericProfilePath(name),
+			},
+		}, nil
 	}
 }
 

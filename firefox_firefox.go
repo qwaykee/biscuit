@@ -9,12 +9,12 @@ type FirefoxBrowser struct {
 	FirefoxBase
 }
 
-func NewFirefox() *FirefoxBrowser {
+func NewFirefox() (Browser, error) {
 	return &FirefoxBrowser{
 		FirefoxBase: FirefoxBase{
 			ProfilesPathFn: firefoxProfilesPath,
 		},
-	}
+	}, nil
 }
 
 func (browser *FirefoxBrowser) Name() string {

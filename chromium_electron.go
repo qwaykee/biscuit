@@ -10,20 +10,22 @@ type ElectronApp struct {
 	AppName string
 }
 
-func NewElectron(appName string) (*ElectronApp, error) {
-	electron := &ElectronApp{
-		AppName: appName,
-		ChromiumBase: ChromiumBase{
-			LocalStatePathFn: electronLocalStatePath(appName),
-			CookiePathFn:     electronCookiePath(appName),
-		},
-	}
+func NewElectron(appName string) func() (Browser, error) {
+	return func() (Browser, error) {
+		electron := &ElectronApp{
+			AppName: appName,
+			ChromiumBase: ChromiumBase{
+				LocalStatePathFn: electronLocalStatePath(appName),
+				CookiePathFn:     electronCookiePath(appName),
+			},
+		}
 
-	if err := electron.initializeChromium(); err != nil {
-		return nil, err
-	}
+		if err := electron.initializeChromium(); err != nil {
+			return nil, err
+		}
 
-	return electron, nil
+		return electron, nil
+	}
 }
 
 func (e *ElectronApp) Name() string {

@@ -13,6 +13,8 @@ var (
 	// candy code to use like biscuit.GetCookies(biscuit.Firefox)
 	// instead of having to initialize the Browser first
 	Chrome BrowserName = "chrome"
+	Opera BrowserName = "opera"
+	Edge BrowserName = "edge"
 	Firefox BrowserName = "firefox"
 	Librewolf BrowserName = "librewolf"
 	Waterfox BrowserName = "waterfox"
@@ -20,22 +22,28 @@ var (
 	Electron BrowserName = "electron"
 )
 
-func NewBrowser(browserName BrowserName) (Browser, error) {
-	switch browserName {
-	case Chrome:
-		return NewChrome()
-	case Firefox:
-		return NewFirefox(), nil
-	case Librewolf:
-		return NewFirefoxGeneric("librewolf"), nil
-	case Waterfox:
-		return NewFirefoxGeneric("Waterfox"), nil
-	case Zen:
-		return NewFirefoxGeneric("Zen"), nil
-	case Electron:
-		// TODO: Fix placeholder discord to allow any electron apps
-		return NewElectron("discord")
-	default:
-		return nil, errors.New("selected browser isn't implemented yet")
-	}
+type BrowserFactory func() (Browser, error)
+
+var browserRegistry = make(map[BrowserName]BrowserFactory)
+
+func RegisterBrowser(name BrowserName, factory BrowserFactory) {
+    browserRegistry[name] = factory
+}
+
+func NewBrowser(name BrowserName) (Browser, error) {
+    if browser, exists := browserRegistry[name]; exists {
+        return browser()
+    }
+    return nil, errors.New("selected browser isn't implemented yet")
+}
+
+func init() {
+	RegisterBrowser(Chrome, NewChrome)
+	RegisterBrowser(Opera, NewOpera)
+	RegisterBrowser(Edge, NewEdge)
+	RegisterBrowser(Electron, NewElectron("discord"))
+	RegisterBrowser(Firefox, NewFirefox)
+	RegisterBrowser(Librewolf, NewFirefoxGeneric("librewolf"))
+	RegisterBrowser(Waterfox, NewFirefoxGeneric("Waterfox"))
+	RegisterBrowser(Zen, NewFirefoxGeneric("Zen"))
 }

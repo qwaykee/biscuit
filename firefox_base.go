@@ -43,7 +43,7 @@ func (fb *FirefoxBase) GetCookies() ([]Cookie, error) {
 	var cookies []Cookie
 
 	for _, cookiePath := range cookiePaths {
-		newCookies, err := firefoxGetCookies(cookiePath)
+		newCookies, err := fb.getCookiesFrom(cookiePath)
 		if err != nil {
 			return cookies, err
 		}
@@ -54,7 +54,7 @@ func (fb *FirefoxBase) GetCookies() ([]Cookie, error) {
 	return cookies, nil
 }
 
-func firefoxGetCookies(cookiePath string) ([]Cookie, error) {
+func (fb *FirefoxBase) getCookiesFrom(cookiePath string) ([]Cookie, error) {
 	db, err := sql.Open("sqlite3", fmt.Sprintf("file:%s?cache=shared&mode=ro", cookiePath))
 	if err != nil {
 		return nil, err

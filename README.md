@@ -5,7 +5,7 @@ NOTE: This library isn't stable yet, expect many changes in the future
 A simple library to read cookies from multiple browsers accross all operating systems with a Kooky-like syntax
 
 Currently supports:
-- Chrome on Windows only
+- Chrome. edge, opera on Windows only
 - Firefox, librewolf, waterfox, zen on Windows only
 - Electron apps
 

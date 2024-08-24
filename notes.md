@@ -2,7 +2,7 @@
 
 - [ ] Chrome (chromium), firefox, safari support
 - [ ] Edge, opera, epiphany, arc (chromium), firefox and derivates, internet explorer support
-- [ ] !!Edge support!! (can't find the cookie location)
+- [x] !!Edge support!! (can't find the cookie location)
 - [ ] Windows, mac os, linux support
 - [x] Cookie filters when reading
 - [ ] Test for linux and mac os

@@ -27,7 +27,8 @@ import (
 )
 
 func main() {
-	// get all cookies which name contains "token" or "auth" from any chrome profile at default installation path
+	// get all cookies which name contains "token" or "auth"
+	// from any chrome profile at default installation path
 	cookies, err := biscuit.GetCookies(biscuit.Chrome, biscuit.NameContains("token", "auth"))
 	if err != nil {
 		panic(err)

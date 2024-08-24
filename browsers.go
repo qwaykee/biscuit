@@ -2,14 +2,18 @@ package biscuit
 
 import "errors"
 
-type Browser interface {
-	Name() string
-	GetCookies() ([]Cookie, error)
-}
+type (
+	Browser interface {
+		Name() string
+		GetCookies() ([]Cookie, error)
+	}
 
-type BrowserName string
+	BrowserName string
+	
+	BrowserFactory func() (Browser, error)
+)
 
-var (
+const (
 	// candy code to use like biscuit.GetCookies(biscuit.Firefox)
 	// instead of having to initialize the Browser first
 	All BrowserName = "all" // try getting cookies from every browsers (see GetCookies -> cookies.go)
@@ -23,8 +27,6 @@ var (
 	Waterfox BrowserName = "waterfox"
 	Zen BrowserName = "zen"
 )
-
-type BrowserFactory func() (Browser, error)
 
 var browserRegistry = make(map[BrowserName]BrowserFactory)
 

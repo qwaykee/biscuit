@@ -13,13 +13,13 @@ var (
 	// candy code to use like biscuit.GetCookies(biscuit.Firefox)
 	// instead of having to initialize the Browser first
 	Chrome BrowserName = "chrome"
+	Electron BrowserName = "electron"
 	Opera BrowserName = "opera"
 	Edge BrowserName = "edge"
 	Firefox BrowserName = "firefox"
 	Librewolf BrowserName = "librewolf"
 	Waterfox BrowserName = "waterfox"
 	Zen BrowserName = "zen"
-	Electron BrowserName = "electron"
 )
 
 type BrowserFactory func() (Browser, error)

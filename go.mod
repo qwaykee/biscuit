@@ -1,4 +1,4 @@
-module biscuit
+module github.com/qwaykee/biscuit
 
 go 1.22.1
 

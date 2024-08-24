@@ -7,6 +7,15 @@ import (
 	"time"
 )
 
+func executeOnAny(fn func(string, string) bool, compareTo string, list []string) bool {
+	for _, str := range list {
+		if fn(compareTo, str) {
+			return true
+		}
+	}
+	return false
+}
+
 type Filter func(c Cookie) bool
 
 func Host(domain string) Filter {
@@ -14,19 +23,19 @@ func Host(domain string) Filter {
 		return c.Host == domain
 	}
 }
-func HostContains(substr string) Filter {
+func HostContains(substr ...string) Filter {
 	return func(c Cookie) bool {
-		return strings.Contains(c.Host, substr)
+		return executeOnAny(strings.Contains, c.Host, substr)
 	}
 }
-func HostHasPrefix(prefix string) Filter {
+func HostHasPrefix(prefixes ...string) Filter {
 	return func(c Cookie) bool {
-		return strings.HasPrefix(c.Host, prefix)
+		return executeOnAny(strings.HasPrefix, c.Host, prefixes)
 	}
 }
-func HostHasSuffix(suffix string) Filter {
+func HostHasSuffix(suffixes ...string) Filter {
 	return func(c Cookie) bool {
-		return strings.HasSuffix(c.Host, suffix)
+		return executeOnAny(strings.HasSuffix, c.Host, suffixes)
 	}
 }
 
@@ -36,21 +45,21 @@ func Name(name string) Filter {
 	}
 }
 
-func NameContains(substr string) Filter {
+func NameContains(substr ...string) Filter {
 	return func(c Cookie) bool {
-		return strings.Contains(c.Name, substr)
+		return executeOnAny(strings.Contains, c.Name, substr)
 	}
 }
 
-func NameHasPrefix(prefix string) Filter {
+func NameHasPrefix(prefixes ...string) Filter {
 	return func(c Cookie) bool {
-		return strings.HasPrefix(c.Name, prefix)
+		return executeOnAny(strings.HasPrefix, c.Name, prefixes)
 	}
 }
 
-func NameHasSuffix(suffix string) Filter {
+func NameHasSuffix(suffixes ...string) Filter {
 	return func(c Cookie) bool {
-		return strings.HasSuffix(c.Name, suffix)
+		return executeOnAny(strings.HasSuffix, c.Name, suffixes)
 	}
 }
 
@@ -59,19 +68,19 @@ func Path(path string) Filter {
 		return c.Path == path
 	}
 }
-func PathContains(substr string) Filter {
+func PathContains(substr ...string) Filter {
 	return func(c Cookie) bool {
-		return strings.Contains(c.Path, substr)
+		return executeOnAny(strings.Contains, c.Path, substr)
 	}
 }
-func PathHasPrefix(prefix string) Filter {
+func PathHasPrefix(prefixes ...string) Filter {
 	return func(c Cookie) bool {
-		return strings.HasPrefix(c.Path, prefix)
+		return executeOnAny(strings.HasPrefix, c.Path, prefixes)
 	}
 }
-func PathHasSuffix(suffix string) Filter {
+func PathHasSuffix(suffixes ...string) Filter {
 	return func(c Cookie) bool {
-		return strings.HasSuffix(c.Path, suffix)
+		return executeOnAny(strings.HasSuffix, c.Path, suffixes)
 	}
 }
 func PathDepth(depth int) Filter {
@@ -97,21 +106,21 @@ func Value(value string) Filter {
 	}
 }
 
-func ValueContains(substr string) Filter {
+func ValueContains(substr ...string) Filter {
 	return func(c Cookie) bool {
-		return strings.Contains(c.Value, substr)
+		return executeOnAny(strings.Contains, c.Value, substr)
 	}
 }
 
-func ValueHasPrefix(prefix string) Filter {
+func ValueHasPrefix(prefixes ...string) Filter {
 	return func(c Cookie) bool {
-		return strings.HasPrefix(c.Value, prefix)
+		return executeOnAny(strings.HasPrefix, c.Value, prefixes)
 	}
 }
 
-func ValueHasSuffix(suffix string) Filter {
+func ValueHasSuffix(suffixes ...string) Filter {
 	return func(c Cookie) bool {
-		return strings.HasSuffix(c.Value, suffix)
+		return executeOnAny(strings.HasSuffix, c.Value, suffixes)
 	}
 }
 

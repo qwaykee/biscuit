@@ -12,6 +12,8 @@ type BrowserName string
 var (
 	// candy code to use like biscuit.GetCookies(biscuit.Firefox)
 	// instead of having to initialize the Browser first
+	All BrowserName = "all" // try getting cookies from every browsers (see GetCookies -> cookies.go)
+
 	Chrome BrowserName = "chrome"
 	Electron BrowserName = "electron"
 	Opera BrowserName = "opera"

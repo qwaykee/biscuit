@@ -3,6 +3,8 @@ package biscuit
 import (
 	"time"
 	"net/http"
+	"sync"
+	"log"
 )
 
 type (
@@ -23,6 +25,35 @@ type (
 )
 
 func GetCookies(browserName BrowserName, filters ...Filter) ([]Cookie, error) {
+	if browserName == All {
+		var mu sync.Mutex
+		var wg sync.WaitGroup
+		var cookies []Cookie
+
+		for browser, _ := range browserRegistry {
+			go func() {
+				wg.Add(1)
+				newCookies, err := getCookies(browser, filters)
+				if err != nil {
+					// TODO: Handle error in another way
+					log.Println(err)
+				}
+
+				mu.Lock()
+				cookies = append(cookies, newCookies...)
+				mu.Unlock()
+				wg.Done()
+			}()
+		}
+
+		wg.Wait()
+		return cookies, nil
+	}
+
+	return getCookies(browserName, filters)
+}
+
+func getCookies(browserName BrowserName, filters []Filter) ([]Cookie, error) {
 	browser, err := NewBrowser(browserName)
 	if err != nil {
 		return nil, err

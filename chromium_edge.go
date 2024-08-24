@@ -5,13 +5,13 @@ import (
 	"os"
 )
 
-type EdgeBrowser struct {
-	ChromiumBase
+type edgeBrowser struct {
+	chromiumBase
 }
 
-func NewEdge() (Browser, error) {
-	chrome := &EdgeBrowser{
-		ChromiumBase: ChromiumBase{
+func newEdge() (Browser, error) {
+	chrome := &edgeBrowser{
+		chromiumBase: chromiumBase{
 			LocalStatePathFn: edgeLocalStatePath,
 			CookiePathFn: edgeCookiePath,
 		},
@@ -24,7 +24,7 @@ func NewEdge() (Browser, error) {
 	return chrome, nil
 }
 
-func (browser *EdgeBrowser) Name() string {
+func (browser *edgeBrowser) Name() string {
 	return "Edge"
 }
 

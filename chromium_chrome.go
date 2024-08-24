@@ -5,13 +5,13 @@ import (
 	"os"
 )
 
-type ChromeBrowser struct {
-	ChromiumBase
+type chromeBrowser struct {
+	chromiumBase
 }
 
-func NewChrome() (Browser, error) {
-	chrome := &ChromeBrowser{
-		ChromiumBase: ChromiumBase{
+func newChrome() (Browser, error) {
+	chrome := &chromeBrowser{
+		chromiumBase: chromiumBase{
 			LocalStatePathFn: chromeLocalStatePath,
 			CookiePathFn: chromeCookiePath,
 		},
@@ -24,7 +24,7 @@ func NewChrome() (Browser, error) {
 	return chrome, nil
 }
 
-func (browser *ChromeBrowser) Name() string {
+func (browser *chromeBrowser) Name() string {
 	return "Chrome"
 }
 

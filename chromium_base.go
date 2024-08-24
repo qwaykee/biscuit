@@ -17,7 +17,7 @@ import (
 	"os"
 )
 
-type ChromiumBase struct {
+type chromiumBase struct {
 	EncryptedAESKey  []byte
 	DecryptedAESKey  string
 	Version          int
@@ -26,7 +26,7 @@ type ChromiumBase struct {
 	CookiesPath		 []string
 }
 
-func (cb *ChromiumBase) initializeChromium() error {
+func (cb *chromiumBase) initializeChromium() error {
 	data, err := os.ReadFile(cb.LocalStatePathFn())
 	if err != nil {
 		return err
@@ -73,7 +73,7 @@ func (cb *ChromiumBase) initializeChromium() error {
 	return nil
 }
 
-func (cb *ChromiumBase) GetCookies() ([]Cookie, error) {
+func (cb *chromiumBase) GetCookies() ([]Cookie, error) {
 	var cookies []Cookie
 
 	for _, cookiePath := range cb.CookiesPath {
@@ -88,7 +88,7 @@ func (cb *ChromiumBase) GetCookies() ([]Cookie, error) {
 	return cookies, nil
 }
 
-func (cb *ChromiumBase) getCookiesFrom(cookiePath string) ([]Cookie, error) {
+func (cb *chromiumBase) getCookiesFrom(cookiePath string) ([]Cookie, error) {
 	db, err := sql.Open("sqlite3", fmt.Sprintf("file:%s?cache=shared&mode=ro", cookiePath))
 	if err != nil {
 		return nil, err
@@ -174,7 +174,7 @@ func (cb *ChromiumBase) getCookiesFrom(cookiePath string) ([]Cookie, error) {
 	return cookies, nil
 }
 
-func (cb *ChromiumBase) getAesKey() (string, error) {
+func (cb *chromiumBase) getAesKey() (string, error) {
     encryptedAesKey, err := base64.StdEncoding.DecodeString(string(cb.EncryptedAESKey))
 	if err != nil {
 		return "", err

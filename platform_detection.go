@@ -2,16 +2,16 @@ package biscuit
 
 import "runtime"
 
-type OS string
+type platform string
 
 const (
-	windows OS = "Windows"
-	mac OS = "Mac"
-	linux OS = "Linux"
-	unknown OS = "Unknown"
+	windows platform = "Windows"
+	mac platform = "Mac"
+	linux platform = "Linux"
+	unknown platform = "Unknown"
 )
 
-func detectOS() OS {
+func detectOS() platform {
 	switch os := runtime.GOOS; os {
 	case "darwin":
 		return mac

@@ -6,24 +6,24 @@ import (
 	"os"
 )
 
-type FirefoxGenericBrowser struct {
+type firefoxGenericBrowser struct {
 	name string
-	FirefoxBase
+	firefoxBase
 }
 
-func NewFirefoxGeneric(name string) func() (Browser, error) {
+func newFirefoxGeneric(name string) func() (Browser, error) {
 	return func() (Browser, error) {
 		// name is case sensitive for the path to work
-		return &FirefoxGenericBrowser{
+		return &firefoxGenericBrowser{
 			name: name,
-			FirefoxBase: FirefoxBase{
+			firefoxBase: firefoxBase{
 				ProfilesPathFn: firefoxGenericProfilePath(name),
 			},
 		}, nil
 	}
 }
 
-func (browser *FirefoxGenericBrowser) Name() string {
+func (browser *firefoxGenericBrowser) Name() string {
 	return strings.ToTitle(browser.name)
 }
 

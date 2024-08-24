@@ -10,19 +10,11 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-type FirefoxBase struct {
+type firefoxBase struct {
 	ProfilesPathFn     func() string
 }
 
-func NewFirefoxBase() *FirefoxBase {
-	return &FirefoxBase{}
-}
-
-func (fb *FirefoxBase) Name() string {
-	return "Name"
-}
-
-func (fb *FirefoxBase) GetCookies() ([]Cookie, error) {
+func (fb *firefoxBase) GetCookies() ([]Cookie, error) {
 	var cookiePaths []string
 
 	profilesPath := fb.ProfilesPathFn()
@@ -54,7 +46,7 @@ func (fb *FirefoxBase) GetCookies() ([]Cookie, error) {
 	return cookies, nil
 }
 
-func (fb *FirefoxBase) getCookiesFrom(cookiePath string) ([]Cookie, error) {
+func (fb *firefoxBase) getCookiesFrom(cookiePath string) ([]Cookie, error) {
 	db, err := sql.Open("sqlite3", fmt.Sprintf("file:%s?cache=shared&mode=ro", cookiePath))
 	if err != nil {
 		return nil, err

@@ -5,13 +5,13 @@ import (
 	"os"
 )
 
-type OperaBrowser struct {
-	ChromiumBase
+type operaBrowser struct {
+	chromiumBase
 }
 
-func NewOpera() (Browser, error) {
-	chrome := &OperaBrowser{
-		ChromiumBase: ChromiumBase{
+func newOpera() (Browser, error) {
+	chrome := &operaBrowser{
+		chromiumBase: chromiumBase{
 			LocalStatePathFn: operaLocalStatePath,
 			CookiePathFn: operaCookiePath,
 		},
@@ -24,7 +24,7 @@ func NewOpera() (Browser, error) {
 	return chrome, nil
 }
 
-func (browser *OperaBrowser) Name() string {
+func (browser *operaBrowser) Name() string {
 	return "Opera"
 }
 

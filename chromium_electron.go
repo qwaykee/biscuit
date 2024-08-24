@@ -5,16 +5,16 @@ import (
 	"os"
 )
 
-type ElectronApp struct {
-	ChromiumBase
+type electronApp struct {
+	chromiumBase
 	AppName string
 }
 
-func NewElectron(appName string) func() (Browser, error) {
+func newElectron(appName string) func() (Browser, error) {
 	return func() (Browser, error) {
-		electron := &ElectronApp{
+		electron := &electronApp{
 			AppName: appName,
-			ChromiumBase: ChromiumBase{
+			chromiumBase: chromiumBase{
 				LocalStatePathFn: electronLocalStatePath(appName),
 				CookiePathFn:     electronCookiePath(appName),
 			},
@@ -28,7 +28,7 @@ func NewElectron(appName string) func() (Browser, error) {
 	}
 }
 
-func (e *ElectronApp) Name() string {
+func (e *electronApp) Name() string {
 	return e.AppName
 }
 

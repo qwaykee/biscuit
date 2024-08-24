@@ -40,12 +40,12 @@ func NewBrowser(name BrowserName) (Browser, error) {
 }
 
 func init() {
-	RegisterBrowser(Chrome, NewChrome)
-	RegisterBrowser(Opera, NewOpera)
-	RegisterBrowser(Edge, NewEdge)
-	RegisterBrowser(Electron, NewElectron("discord"))
-	RegisterBrowser(Firefox, NewFirefox)
-	RegisterBrowser(Librewolf, NewFirefoxGeneric("librewolf"))
-	RegisterBrowser(Waterfox, NewFirefoxGeneric("Waterfox"))
-	RegisterBrowser(Zen, NewFirefoxGeneric("Zen"))
+	RegisterBrowser(Chrome, newChrome)
+	RegisterBrowser(Opera, newOpera)
+	RegisterBrowser(Edge, newEdge)
+	RegisterBrowser(Electron, newElectron("discord"))
+	RegisterBrowser(Firefox, newFirefox)
+	RegisterBrowser(Librewolf, newFirefoxGeneric("librewolf"))
+	RegisterBrowser(Waterfox, newFirefoxGeneric("Waterfox"))
+	RegisterBrowser(Zen, newFirefoxGeneric("Zen"))
 }

@@ -5,19 +5,19 @@ import (
 	"os"
 )
 
-type FirefoxBrowser struct {
-	FirefoxBase
+type firefoxBrowser struct {
+	firefoxBase
 }
 
-func NewFirefox() (Browser, error) {
-	return &FirefoxBrowser{
-		FirefoxBase: FirefoxBase{
+func newFirefox() (Browser, error) {
+	return &firefoxBrowser{
+		firefoxBase: firefoxBase{
 			ProfilesPathFn: firefoxProfilesPath,
 		},
 	}, nil
 }
 
-func (browser *FirefoxBrowser) Name() string {
+func (browser *firefoxBrowser) Name() string {
 	return "Firefox"
 }
 
